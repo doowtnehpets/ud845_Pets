@@ -40,6 +40,6 @@ public class PetDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        // No need for any code as database is still version 1 
+        // No need for any code as database is still version 1
     }
 }
