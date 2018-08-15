@@ -15,6 +15,7 @@
  */
 package com.example.android.pets;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -34,6 +35,9 @@ import com.example.android.pets.data.PetDbHelper;
  */
 public class CatalogActivity extends AppCompatActivity {
 
+    // DB helper to access the database
+    private PetDbHelper mDbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +53,11 @@ public class CatalogActivity extends AppCompatActivity {
             }
         });
 
+        // Instantiate database
+        mDbHelper = new PetDbHelper(this);
+
         displayDatabaseInfo();
+
     }
 
     /**
@@ -77,6 +85,21 @@ public class CatalogActivity extends AppCompatActivity {
         }
     }
 
+    private void insertPet() {
+        // Load the DB in writeable mode
+        SQLiteDatabase sqLiteDatabase = mDbHelper.getWritableDatabase();
+
+        // Load the dummy data into a ContentValues object
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(PetEntry.COLUMN_PET_NAME, "Toto");
+        contentValues.put(PetEntry.COLUMN_PET_BREED, "Terrier");
+        contentValues.put(PetEntry.COLUMN_PET_GENDER, PetEntry.GENDER_MALE);
+        contentValues.put(PetEntry.COLUMN_PET_WEIGHT, 7);
+
+        // Insert the pet data into the SQL database
+        long newRowId = sqLiteDatabase.insert(PetEntry.TABLE_NAME, null, contentValues);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu options from the res/menu/menu_catalog.xml file.
@@ -91,7 +114,8 @@ public class CatalogActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_insert_dummy_data:
-                // Do nothing for now
+                insertPet();
+                displayDatabaseInfo();
                 return true;
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
