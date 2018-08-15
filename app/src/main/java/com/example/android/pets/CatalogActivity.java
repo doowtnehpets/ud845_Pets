@@ -60,8 +60,12 @@ public class CatalogActivity extends AppCompatActivity {
         // Instantiate database
         mDbHelper = new PetDbHelper(this);
 
-        displayDatabaseInfo();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        displayDatabaseInfo();
     }
 
     /**
@@ -69,14 +73,19 @@ public class CatalogActivity extends AppCompatActivity {
      * the pets database.
      */
     private void displayDatabaseInfo() {
-        // To access our database, we instantiate our subclass of SQLiteOpenHelper
-        // and pass the context, which is the current activity.
-        PetDbHelper mDbHelper = new PetDbHelper(this);
         // Create and/or open a database to read from it
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
         // Perform this raw SQL query "SELECT * FROM pets"
         // to get a Cursor that contains all rows from the pets table.
-        Cursor cursor = db.rawQuery("SELECT * FROM " + PetEntry.TABLE_NAME, null);
+        Cursor cursor = db.query(PetEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+
         try {
             // Display the number of rows in the Cursor (which reflects the number of rows in the
             // pets table in the database).
@@ -107,12 +116,6 @@ public class CatalogActivity extends AppCompatActivity {
         long newRowId = sqLiteDatabase.insert(PetEntry.TABLE_NAME, null, contentValues);
 
         Log.v(LOG_TAG, "New row ID " + newRowId);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        displayDatabaseInfo();
     }
 
     @Override
