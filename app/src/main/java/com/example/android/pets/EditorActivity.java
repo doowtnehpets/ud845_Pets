@@ -148,6 +148,9 @@ public class EditorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Insert a pet into the database using the info supplied by the user
+     */
     private void insertPet() {
         // Read the data from the input fields
         String nameString = mNameEditText.getText().toString().trim();
