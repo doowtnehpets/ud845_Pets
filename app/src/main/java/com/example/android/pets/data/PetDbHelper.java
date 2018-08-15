@@ -8,6 +8,7 @@ import com.example.android.pets.data.PetContract.PetEntry;
 
 public class PetDbHelper extends SQLiteOpenHelper {
 
+    // Log tag
     public static final String LOG_TAG = PetDbHelper.class.getSimpleName();
 
     // Database Version and Name
