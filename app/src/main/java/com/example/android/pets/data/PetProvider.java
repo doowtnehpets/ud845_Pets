@@ -26,7 +26,7 @@ public class PetProvider extends ContentProvider {
 
         // Instantiate database
         mDbHelper = new PetDbHelper(getContext());
-        
+
         return true;
     }
 
