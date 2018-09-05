@@ -72,4 +72,9 @@
     <!-- Toast messages for editor save successful or fail -->
     <string name="editor_update_pet_successful">Pet updated</string>
     <string name="editor_update_pet_failed">Error with updating pet</string>
+
+    <!-- Dialog messages for leaving the editor -->
+    <string name="unsaved_changes_dialog_msg">Discard you changes and quit editing?</string>
+    <string name="discard">Discard</string>
+    <string name="keep_editing">Keep Editing</string>
 </resources>
